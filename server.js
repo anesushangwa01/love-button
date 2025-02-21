@@ -30,13 +30,14 @@ app.post('/send-email', (req, res) => {
             text: 'Ropah',
             html: `
                 <div style="font-family: Arial, sans-serif; color: #333; text-align: center; padding: 20px;">
-                    <h1 style="color: #e91e63;">💖 I Love You Too! 💖</h1>
+                    <h1 style="color: #e91e63;">💖 I Love You Too! 💖 <br>
+                    R</h1>
                    
                     <p style="font-size: 18px;">Here's a little something to brighten your day:</p>
                     <img src="https://cdn.pixabay.com/photo/2015/09/06/20/26/i-beg-your-pardon-927750_960_720.jpg" alt="Love Image" style="width: 100%; max-width: 400px; border-radius: 10px; margin: 20px 0;">
                     <p style="font-size: 18px;">You mean the world to me. 💌</p>
                     <p style="font-size: 18px;">With all my love,</p>
-                    <p style="font-size: 18px; font-weight: bold; color: #e91e63;">Your Admirer #Anesu #Shangwa #Shaingwa  #Shengwa 💕</p>
+                    <p style="font-size: 18px; font-weight: bold; color: #e91e63;">Your Admirer #Anesu #Shangwa #Shaingwa  #Shengwa #Ropah :) 💕</p>
                 </div>
             `
         },

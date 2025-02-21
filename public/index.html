@@ -15,23 +15,20 @@
             margin: 0;
             background-repeat: no-repeat;
             background-size: cover;
-           background-image: url('https://cdn.pixabay.com/photo/2015/02/06/19/57/valentine-candy-626446_1280.jpg');
+            background-image: url('https://cdn.pixabay.com/photo/2015/02/06/19/57/valentine-candy-626446_1280.jpg');
             text-align: center;
         }
         .container {
             max-width: 600px;
-            
         }
-
-     .card{
+        .card {
             /* From https://css.glass */
-/* From https://css.glass */
-background: rgba(255, 255, 255, 0.2);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         .button {
             padding: 10px 20px;
@@ -44,28 +41,38 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         .yes { background-color: #4CAF50; color: white; }
         .no { background-color: #f44336; color: white; position: absolute; }
         .next { background-color: #008CBA; color: white; }
+        .loading {
+            display: none; /* Hidden by default */
+            font-size: 18px;
+            color: white;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="container mt-5 ice">  <div class="row justify-content-center"> <div class="col-md-6"> <div class="card">
-            <div class="card-body text-center"> <h1 id="message">Hie Ropafadzo :)</h1>
+        <div class="container mt-5 ice">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h1 id="message">Hie Ropafadzo :)</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
         <button class="button next" id="nextButton">Next</button>
         <div id="loveSection" style="display: none;">
             <h1>Do you love me?</h1>
             <button class="button yes" id="yesButton">Yes</button>
             <button class="button no" id="noButton">No</button>
+            <div id="loading" class="loading text-black">  <h5>Please wait Ropafadzo, sending email...</h5> </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const messages = [
-          
             "You are special to me!",
             "Every moment with you is a gift!",
             "Your smile brightens my day!",
@@ -77,6 +84,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         const messageElement = document.getElementById("message");
         const nextButton = document.getElementById("nextButton");
         const loveSection = document.getElementById("loveSection");
+        const loadingElement = document.getElementById("loading");
 
         nextButton.addEventListener("click", () => {
             index++;
@@ -100,6 +108,10 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         });
 
         yesButton.addEventListener('click', () => {
+            // Show the "Please wait" message
+            loadingElement.style.display = "block";
+            yesButton.disabled = true; // Disable the button to prevent multiple clicks
+
             fetch('/send-email', {
                 method: 'POST',
                 headers: {
@@ -108,10 +120,18 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             })
             .then(response => response.text())
             .then(data => {
-                alert('Email sent please check your email :)* ');
+                // Hide the "Please wait" message and show success alert
+                loadingElement.style.display = "none";
+                alert('Email sent! Please check your email. 💌');
             })
             .catch(error => {
+                // Hide the "Please wait" message and show error alert
+                loadingElement.style.display = "none";
+                alert('Oops! Something went wrong. Please try again.');
                 console.error('Error:', error);
+            })
+            .finally(() => {
+                yesButton.disabled = false; // Re-enable the button
             });
         });
     </script>
