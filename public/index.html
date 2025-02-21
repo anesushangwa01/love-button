@@ -13,6 +13,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
            background-image: url('https://cdn.pixabay.com/photo/2015/02/06/19/57/valentine-candy-626446_1280.jpg');
             text-align: center;
         }
@@ -106,7 +108,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             })
             .then(response => response.text())
             .then(data => {
-                alert('Email sent! She loves you!');
+                alert('Email sent please check your email :)* ');
             })
             .catch(error => {
                 console.error('Error:', error);

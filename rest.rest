@@ -1,0 +1,9 @@
+curl -X POST \
+  'https://api.mailjet.com/v4/sms-send' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Basic <Base64 encoded string of 0f034b4efa99ec147c9da2a757b90f11:e7e643edef78acdbbd2d2d63c3d2c125>' \
+  -d '{
+    "From": "MJPilot",  // Your approved sender name
+    "To": "+263774998764", // Correctly formatted phone number
+    "Text": "Test SMS from curl"
+  }'
